@@ -3,5 +3,5 @@
 ## Installation
 
 ```r
-remotes::install_github(repo = "SamCH93/ciCalibrate", subdir = "pkg")
+remotes::install_github(repo = "SamCH93/ciCalibrate")
 ```

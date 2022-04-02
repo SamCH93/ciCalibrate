@@ -42,7 +42,7 @@ jobs:
         run: |
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
-          remotes::install_github("SamCH93/ciCalibrate", subdir = "pkg")
+          remotes::install_github("SamCH93/ciCalibrate")
         shell: Rscript {0}
         
       - name: Check
