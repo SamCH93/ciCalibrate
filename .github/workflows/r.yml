@@ -19,12 +19,12 @@ on:
 
 jobs:
   R-CMD-check:
-    name: R CMD check on R version ${{ matrix.node_version }} and ${{ matrix.os }}
+    name: R CMD check on R ${{ matrix.r-version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         r-version: ['release', 'devel']
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest] #[ubuntu-latest, windows-latest, macOS-latest]
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -45,7 +45,7 @@ jobs:
           remotes::install_github("SamCH93/ciCalibrate")
         shell: Rscript {0}
         
-      - name: Check
+      - name: R CMD check
         run: |
           options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning")

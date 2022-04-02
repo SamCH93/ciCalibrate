@@ -1,5 +1,5 @@
 Package: ciCalibrate
-Title: Calibration of confidence intervals to support intervals
+Title: Calibration of Confidence Intervals to Support Intervals
 Version: 0.42
 Authors@R:
     person(given = "Samuel",
