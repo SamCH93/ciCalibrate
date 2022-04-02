@@ -19,21 +19,21 @@ document: description
 	R -e 'devtools::document()'
 
 manual: document
-	R -e 'devtools::build_manual()'
+	R -e 'devtools::build_manual(path = "out/")'
 
 $(TAR): manual
-	R -e 'devtools::build()'
+	R -e 'devtools::build(path = "out/")'
 
 build: $(TAR)
 
 install: $(TAR)
-	R -e 'devtools::install(build = FALSE)'
+	R -e 'devtools::install_local(path = "out/$(TAR)")'
 
-check:
-	R -e 'devtools::check(cran = FALSE)
+check: $(TAR)
+	R -e 'devtools::check_built(path = "out/$(TAR)", cran = FALSE)'
 
-cran:
-	R -e 'devtools::check(cran = TRUE, remote = TRUE)'
+cran: $(TAR)
+	R -e 'devtools::check_built(path = "out/$(TAR)", cran = TRUE, remote = TRUE)'
 
 test:
 	R -e 'devtools::test()'

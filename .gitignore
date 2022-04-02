@@ -37,3 +37,7 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# out directory files
+out/*.tar.gz
+out/*.pdf
