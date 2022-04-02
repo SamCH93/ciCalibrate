@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         r-version: ['release', 'devel']
-        os: [ubuntu-latest] #[ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
