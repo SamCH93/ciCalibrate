@@ -35,7 +35,7 @@
 #'
 #' ## minimum support interval
 #' msi <- ciCalibrate(ci = ci, method = "mSI-normal-local")
-#' plot(si)
+#' plot(msi)
 #'
 #' @export
 ciCalibrate <- function(ci = NULL,
@@ -49,7 +49,10 @@ ciCalibrate <- function(ci = NULL,
                         priorSD) {
     ## input checks
     stopifnot(
-        ## TODO write input checks for ci abd ciLevel
+        is.null(ci) |
+        ((length(ci) == 2) &
+         all(is.numeric(ci)) &
+         all(is.finite(ci))),
 
         length(ciLevel) == 1,
         is.numeric(ciLevel),
@@ -151,7 +154,7 @@ ciCalibrate <- function(ci = NULL,
         warning("Support interval does not exist for specified support level")
     }
     res <- list(si = si, bfFun = bfFun, estimate = estimate, se = se,
-                level = siLevel, method = method)
+                siLevel = siLevel, ciLevel = ciLevel, method = method)
     class(res) <- "supInt"
     return(res)
 }
@@ -163,7 +166,45 @@ ciCalibrate <- function(ci = NULL,
 #' @param ... Other arguments
 #' @export
 print.supInt <- function(x, ...) {
-    print(x$si)
+    ## Point estimate with confidence interval
+    ci <- x$estimate + c(-1, 1)*x$se*stats::qnorm(p = 0.5*(1 + x$ciLevel))
+    cat(paste0("\nPoint Estimate [",
+               x$ciLevel*100, "% Confidence Interval] \n"))
+    cat(signif(x$estimate, 2),
+        " [", paste0(signif(ci, 2), collapse = ","), "]\n", sep = "")
+
+    ## Calibration method
+    cat("\nCalibration Method\n")
+    if (x$method == "SI-normal") {
+        cat("Global normal alternative with mean",
+            "and standard deviation")
+    }
+    ## global normal prior under the alternative
+    if (x$method == "SI-normal-local") {
+        cat("Local normal alternative with standard deviation")
+    }
+    ## class of all priors under the alternative
+    if (x$method == "mSI-all") {
+        cat("Minimizing support under class of all alternatives",
+            "(corresponds to likelihood support interval)")
+    }
+    ## class of local normal priors under the alternative
+    if (x$method == "mSI-normal-local") {
+        cat("Minimizing support under class of local normal alternatives")
+    }
+    ## class of Beta(a, 1), a >= 1 priors for the p-value under the alternative
+    if (x$method == "mSI-eplogp") {
+        cat("Minimizing support under class of Beta(a, 1), a >= 1 priors",
+            "for the p-value of the data under the alternative")
+    }
+    cat("\n")
+
+    ## Support interval
+    if (x$siLevel < 1) siLevel <- paste0("1/", signif(1/x$siLevel, 2))
+    else siLevel <- as.character(signif(x$siLevel, 2))
+    cat(paste0("\nk = ", siLevel, " Support Interval\n"))
+    cat("[", paste0(signif(x$si, 2), collapse = ","), "]\n", sep = "")
+
     invisible(x)
 }
 
@@ -188,11 +229,11 @@ plot.supInt <- function(x,
                            "vs." ~
                            italic(H)[1] * ":" ~ theta != theta[scriptstyle("0")]),
          ...)
-    graphics::points(x = x$estimate, y = x$level,
+    graphics::points(x = x$estimate, y = x$siLevel,
                      # y = x$bfFun(x = x$estimate),
                      pch = 20)
     graphics::abline(h = 1, col = "#00000033")
-    graphics::arrows(x0 = x$si[1], x1 = x$si[2], y0 = x$level, angle = 90,
+    graphics::arrows(x0 = x$si[1], x1 = x$si[2], y0 = x$siLevel, angle = 90,
                      code = 3, length = 0.1)
 
 }
