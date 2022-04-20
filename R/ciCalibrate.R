@@ -9,7 +9,7 @@
 #' @param siLevel Support level
 #' @param method Calibration method
 #' @param priorMean Prior mean
-#' @param priorSD Prior standard deviation
+#' @param priorSD Prior standard deviation / scale
 #'
 #' @return A supInt object
 #'
@@ -24,7 +24,7 @@
 #' m <- log(0.8)
 #' s <- 2
 #'
-#' ## compute 3 support interval
+#' ## compute 10 support interval
 #' si <- ciCalibrate(ci = ci, method = "SI-normal", priorMean = m, priorSD = s,
 #'                   siLevel = 10)
 #' si # on logHR scale
@@ -43,8 +43,8 @@ ciCalibrate <- function(ci = NULL,
                         estimate = mean(ci),
                         se = diff(ci) * 0.5 / stats::qnorm(p = 0.5*(1 + ciLevel)),
                         siLevel = 1,
-                        method = c("SI-normal", "SI-normal-local", "mSI-all",
-                                   "mSI-normal-local", "mSI-eplogp"),
+                        method = c("SI-normal", "SI-normal-local", "SI-normal-nonlocal",
+                                   "mSI-all", "mSI-normal-local", "mSI-eplogp"),
                         priorMean,
                         priorSD) {
     ## input checks
@@ -76,6 +76,7 @@ ciCalibrate <- function(ci = NULL,
     )
     method <- match.arg(method)
 
+    ## global normal prior under the alternative
     if (method == "SI-normal") {
         ## input checks
         stopifnot(
@@ -99,7 +100,7 @@ ciCalibrate <- function(ci = NULL,
         }
     }
 
-    ## global normal prior under the alternative
+    ## local normal prior under the alternative
     if (method == "SI-normal-local") {
         ## input checks
         stopifnot(
@@ -112,7 +113,26 @@ ciCalibrate <- function(ci = NULL,
         mSE <- sqrt((log(1 + priorSD^2/se^2) - 2*log(siLevel))*(1 + se^2/priorSD^2))
         ## Bayes factor function bfFun
         bfFun <- function(x) {
-            sqrt(1 + priorSD^2/se^2)*exp(-0.5*((estimate - x)^2/(1 + se^2/priorSD^2)))
+            sqrt(1 + priorSD^2/se^2)*exp(-0.5*(estimate - x)^2/se^2/(1 + se^2/priorSD^2))
+        }
+    }
+
+    ## non-local normal moment prior under the alternative
+    if (method == "SI-normal-nonlocal") {
+        ## input checks
+        stopifnot(
+            length(priorSD) == 1,
+            is.numeric(priorSD),
+            is.finite(priorSD),
+            0 < priorSD
+        )
+        ## standard error multiplier mSE
+        mSE <- sqrt((2*lamW::lambertW0(x = 0.5*exp(0.5)/siLevel*(1 + priorSD^2/se^2)^1.5) - 1)*
+            (1 + se^2/priorSD^2))
+        ## Bayes factor function bfFun
+        bfFun <- function(x) {
+            (1 + priorSD^2/se^2)^1.5 * exp(-0.5 * (estimate - x)^2/se^2 / (1 + se^2/priorSD^2)) /
+                (1 + (estimate - x)^2/se^2 / (1 + se^2/priorSD^2))
         }
     }
 
@@ -179,9 +199,13 @@ print.supInt <- function(x, ...) {
         cat("Global normal alternative with mean",
             "and standard deviation")
     }
-    ## global normal prior under the alternative
+    ## local normal prior under the alternative
     if (x$method == "SI-normal-local") {
         cat("Local normal alternative with standard deviation")
+    }
+    ## nonlical normal moment prior under the alternative
+    if (x$method == "SI-normal-nonlocal") {
+        cat("Nonlocal normal moment alternative with scale parameter")
     }
     ## class of all priors under the alternative
     if (x$method == "mSI-all") {

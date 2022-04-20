@@ -10,8 +10,8 @@ ciCalibrate(
   estimate = mean(ci),
   se = diff(ci) * 0.5/stats::qnorm(p = 0.5 * (1 + ciLevel)),
   siLevel = 1,
-  method = c("SI-normal", "SI-normal-local", "mSI-all", "mSI-normal-local",
-    "mSI-eplogp"),
+  method = c("SI-normal", "SI-normal-local", "SI-normal-nonlocal", "mSI-all",
+    "mSI-normal-local", "mSI-eplogp"),
   priorMean,
   priorSD
 )
@@ -31,7 +31,7 @@ ciCalibrate(
 
 \item{priorMean}{Prior mean}
 
-\item{priorSD}{Prior standard deviation}
+\item{priorSD}{Prior standard deviation / scale}
 }
 \value{
 A supInt object
@@ -48,7 +48,7 @@ ci <- log(ciHR)
 m <- log(0.8)
 s <- 2
 
-## compute 3 support interval
+## compute 10 support interval
 si <- ciCalibrate(ci = ci, method = "SI-normal", priorMean = m, priorSD = s,
                   siLevel = 10)
 si # on logHR scale
@@ -59,7 +59,7 @@ plot(si)
 
 ## minimum support interval
 msi <- ciCalibrate(ci = ci, method = "mSI-normal-local")
-plot(si)
+plot(msi)
 
 }
 \author{
