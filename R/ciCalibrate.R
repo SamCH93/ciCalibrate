@@ -196,21 +196,20 @@ print.supInt <- function(x, ...) {
     ## Calibration method
     cat("\nCalibration Method\n")
     if (x$method == "SI-normal") {
-        cat("Global normal alternative with mean",
-            "and standard deviation")
+        cat("Normal alternative with mean m =",
+            "and standard deviation s =")
     }
     ## local normal prior under the alternative
     if (x$method == "SI-normal-local") {
-        cat("Local normal alternative with standard deviation")
+        cat("Local normal alternative with standard deviation s =")
     }
     ## nonlical normal moment prior under the alternative
     if (x$method == "SI-normal-nonlocal") {
-        cat("Nonlocal normal moment alternative with scale parameter")
+        cat("Nonlocal normal moment alternative with scale parameter s =")
     }
     ## class of all priors under the alternative
     if (x$method == "mSI-all") {
-        cat("Minimizing support under class of all alternatives",
-            "(corresponds to likelihood support interval)")
+        cat("Minimizing support under class of all alternatives")
     }
     ## class of local normal priors under the alternative
     if (x$method == "mSI-normal-local") {
