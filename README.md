@@ -37,21 +37,17 @@ si10 <- ciCalibrate(estimate = logHR, se = se, siLevel = 10, method = "SI-normal
 si10 <- ciCalibrate(ci = ci95, ciLevel = 0.95, siLevel = 10, method = "SI-normal",
                     priorMean = pm, priorSD = psd)
 si10
-```
 
-```
-Point Estimate [95% Confidence Interval] 
--0.19 [-0.29,-0.092]
+#> Point Estimate [95% Confidence Interval] 
+#> -0.19 [-0.29,-0.092]
+#> 
+#> Calibration Method
+#> Normal prior for the parameter under the alternative hypothesis with 
+#> mean m = 0 and standard deviation s = 2
+#> 
+#> k = 10 Support Interval
+#> [-0.27,-0.11]
 
-Calibration Method
-Normal prior for the parameter under the alternative hypothesis with 
-mean m = 0 and standard deviation s = 2
-
-k = 10 Support Interval
-[-0.27,-0.11]
-```
-
-```r
 ## plot Bayes factor function and support interval
 plot(si10)
 ```
