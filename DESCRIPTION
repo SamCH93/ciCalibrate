@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "samuel.pawel@uzh.ch",
            comment = c(ORCID = "0000-0003-2779-320X"))
-Description: Provides functionality for calibrating confidence intervals computed under asymptotic normality to Bayesian/Likelihoodist support intervals.
+Description: Provides functionality for computing support intervals for unknown univariate parameters based on a parameter estimate and standard error or from a confidence interval for the respective parameter.
 License: GPL-3
 Encoding: UTF-8
 Imports: lamW

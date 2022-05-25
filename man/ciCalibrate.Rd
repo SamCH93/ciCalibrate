@@ -17,27 +17,76 @@ ciCalibrate(
 )
 }
 \arguments{
-\item{ci}{Confidence interval}
+\item{ci}{Confidence interval given as a numeric vector of length two}
 
-\item{ciLevel}{Confidence level}
+\item{ciLevel}{Confidence level. Defaults to 0.95.}
 
-\item{estimate}{Parameter estimate}
+\item{estimate}{Parameter estimate, only required if no confidence interval
+and confidence level are specified}
 
-\item{se}{Standard error of the estiamte}
+\item{se}{Standard error of the parameter estimate, only required if no
+confidence interval and confidence level are specified}
 
-\item{siLevel}{Support level}
+\item{siLevel}{Support level. Defaults to 1}
 
-\item{method}{Calibration method}
+\item{method}{Calibration method, can either be \code{"SI-normal"},
+\code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}, \code{"mSI-all"},
+\code{"mSI-normal-local"}, or \code{"mSI-eplogp"}. Defaults to
+\code{"SI-normal"}}
 
-\item{priorMean}{Prior mean}
+\item{priorMean}{Prior mean, only required for \code{"SI-normal"}}
 
-\item{priorSD}{Prior standard deviation / scale}
+\item{priorSD}{Prior standard deviation / scale, only required for
+\code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}}
 }
 \value{
 A supInt object
 }
 \description{
-This function TODO write documentation
+This function computes a support interval for an unknown
+parameter based on either a confidence interval for the parameter or a
+parameter estimate with standard error.
+}
+\details{
+A \emph{support interval} with support level \eqn{k} is defined by the
+parameter values \eqn{\theta_0}{theta0} for which the Bayes factor
+contrasting \eqn{H_0\colon \theta = \theta_0}{H0: theta = theta0} to
+\eqn{H_1\colon \theta \neq \theta_0}{H1: theta != theta0} is larger or
+equal than \eqn{k}, i.e., the parameter values for which the data are at
+least \eqn{k} times more likely than under the alternative. Different
+prior distributions for the parameter \eqn{\theta}{} under the
+alternative \eqn{H_1}{H1} are available:
+\itemize{
+\item \code{method = "SI-normal"}: a normal prior centered around
+\code{priorMean} with standard deviation \code{priorSD}, i.e., \eqn{\theta
+\,|\, H_1 \sim N(\code{priorMean}, \code{priorSD}^2)}{theta | H1 ~
+N(priorMean, priorSD^2)}
+\item \code{method = "SI-normal-local"}: a local normal prior with standard
+deviation \code{priorSD}, i.e., \eqn{\theta \,|\, H_1 \sim N(\theta_0,
+\code{priorSD}^2)}{theta | H1 ~ N(theta0, priorSD^2)}
+\item \code{method = "SI-normal-nonlocal"}: a nonlocal normal moment prior with
+scale \code{priorSD}, i.e., a prior with density \eqn{f(\theta \,|\, H_1) =
+N(\theta \,|\, \theta_0, \code{priorSD}^2) \times (\theta -
+\theta_0)^2/\code{priorSD}^2}{f(theta | H1) = N(theta0, priorSD^2)*
+(theta - theta0)^2/\code{priorSD}^2}
+}
+
+The function also allows to compute \emph{minimum support intervals} which only
+require to specify a class of priors for the parameter under the alternative
+and then compute the minimum Bayes factor over the class of alternatives. The
+following classes of prior distribution are available:
+\itemize{
+\item \code{method = "mSI-all"}: the class of all prior distributions under the
+alternative, this leads to the narrowest support interval possible
+\item \code{method = "mSI-normal-local"}: the class oflocal normal prior
+distributions under the alternative, i.e., \eqn{\theta \,|\, H_1 \sim
+N(\theta_0, v)}{theta | H1 ~ N(theta0, v)} with \eqn{v \geq 0}{v >= 0}
+\item \code{method = "mSI-eplogp"}: the class of monotonically decreasing beta
+prior distributions on the p-value of the data \eqn{p = 2(1 -
+\Phi(|\code{estimate} - \theta_0|/\code{se}))}{p = 2*(1 - pnorm(abs(estimate
+- theta0)/se))}, i.e. \eqn{p \,|\, H_1 \sim \mbox{Be}(\xi, 1)}{p | H1 ~
+Be(xi, 1)} with \eqn{\xi \geq 1}{xi >= 1}
+}
 }
 \examples{
 ## confidence interval of hazard ratio needs to be transformed to log-scale
@@ -61,6 +110,14 @@ plot(si)
 msi <- ciCalibrate(ci = ci, method = "mSI-normal-local")
 plot(msi)
 
+}
+\references{
+Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential calibration of
+confidence intervals. to appear on arXiv soon.
+\doi{10.48550/arXiv.XXXX.XXXXX}
+
+Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The
+support interval. Erkenntnis. \doi{10.1007/s10670-019-00209-z}
 }
 \author{
 Samuel Pawel

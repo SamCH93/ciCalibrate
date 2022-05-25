@@ -2,7 +2,7 @@
 
 **ciCalibrate** is an R package for computing support intervals for unknown
 univariate parameters. A support interval can either be computed based on a
-parameter estimate and standard error or from a confidence interval for the
+parameter estimate and standard error or based on a confidence interval for the
 respective parameter. The main function for doing so is `ciCalibrate`, see the
 manual with `?ciCalibrate` for the available options. Theoretical background on
 support intervals is provided in [Wagenmakers et al.
@@ -18,7 +18,6 @@ remotes::install_github(repo = "SamCH93/ciCalibrate")
 ## Usage
 
 ``` r
-jpeg()
 library("ciCalibrate")
 
 ## data from RECOVERY trial
@@ -33,17 +32,28 @@ psd <- 2 # unit-information standard deviation for a logHR
 ## compute a support interval with support level = 10
 si10 <- ciCalibrate(estimate = logHR, se = se, siLevel = 10, method = "SI-normal",
                     priorMean = pm, priorSD = psd)
-si10
 
 ## compute instead with confidence interval as input
 si10 <- ciCalibrate(ci = ci95, ciLevel = 0.95, siLevel = 10, method = "SI-normal",
                     priorMean = pm, priorSD = psd)
 si10
+```
 
+```
+Point Estimate [95% Confidence Interval] 
+-0.19 [-0.29,-0.092]
+
+Calibration Method
+Normal alternative with mean m = 0 and standard deviation s = 2
+
+k = 10 Support Interval
+[-0.27,-0.11]
+```
+
+```r
 ## plot Bayes factor function and support interval
 plot(si10)
 ```
-
 ![Output of the command plot(si10): the Bayes factor function and the 10 support
 interval](SIexample.png)
 
