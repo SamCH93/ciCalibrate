@@ -51,7 +51,7 @@
 #' @md
 #'
 #' @param ci Confidence interval given as a numeric vector of length two
-#' @param ciLevel Confidence level. Defaults to 0.95.
+#' @param ciLevel Confidence level. Defaults to 0.95
 #' @param estimate Parameter estimate, only required if no confidence interval
 #'     and confidence level are specified
 #' @param se Standard error of the parameter estimate, only required if no
@@ -152,15 +152,17 @@ ciCalibrate <- function(ci = NULL,
             is.finite(priorSD),
             0 <= priorSD
         )
-        ## standard error multiplier mSE
+        ## standard error multiplier
         mSE <- sqrt(log(1 + priorSD^2/se^2) +
                     (estimate - priorMean)^2/(se^2 + priorSD^2) -
                     2*log(siLevel))
-        ## Bayes factor function bfFun
+        ## Bayes factor function
         bfFun <- function(x) {
             sqrt(1 + priorSD^2/se^2)*exp(-0.5*((estimate - x)^2/se^2 -(estimate - priorMean)^2/
                                           (se^2 + priorSD^2)))
         }
+        ## prior parameters
+        priorParams <- list(type = method, priorMean = priorMean, priorSD = priorSD)
     }
 
     ## local normal prior under the alternative
@@ -172,12 +174,14 @@ ciCalibrate <- function(ci = NULL,
             is.finite(priorSD),
             0 < priorSD
         )
-        ## standard error multiplier mSE
+        ## standard error multiplier
         mSE <- sqrt((log(1 + priorSD^2/se^2) - 2*log(siLevel))*(1 + se^2/priorSD^2))
-        ## Bayes factor function bfFun
+        ## Bayes factor function
         bfFun <- function(x) {
             sqrt(1 + priorSD^2/se^2)*exp(-0.5*(estimate - x)^2/se^2/(1 + se^2/priorSD^2))
         }
+        ## prior parameters
+        priorParams <- list(type = method, priorSD = priorSD)
     }
 
     ## non-local normal moment prior under the alternative
@@ -189,14 +193,16 @@ ciCalibrate <- function(ci = NULL,
             is.finite(priorSD),
             0 < priorSD
         )
-        ## standard error multiplier mSE
+        ## standard error multiplier
         mSE <- sqrt((2*lamW::lambertW0(x = 0.5*exp(0.5)/siLevel*(1 + priorSD^2/se^2)^1.5) - 1)*
             (1 + se^2/priorSD^2))
-        ## Bayes factor function bfFun
+        ## Bayes factor function
         bfFun <- function(x) {
             (1 + priorSD^2/se^2)^1.5 * exp(-0.5 * (estimate - x)^2/se^2 / (1 + se^2/priorSD^2)) /
                 (1 + (estimate - x)^2/se^2 / (1 + se^2/priorSD^2))
         }
+        ## prior parameters
+        priorParams <- list(type = method, priorSD = priorSD)
     }
 
     ## class of all priors under the alternative
@@ -207,6 +213,8 @@ ciCalibrate <- function(ci = NULL,
         bfFun <- function(x) {
             exp(-0.5*(estimate - x)^2/se^2)
         }
+        ## prior parameters
+        priorParams <- list(type = method)
     }
 
     ## class of local normal priors under the alternative
@@ -218,6 +226,8 @@ ciCalibrate <- function(ci = NULL,
             z <- (estimate - x)/se
             ifelse(abs(z) < 1, 1, abs(z)*exp(-0.5*(z^2 - 1)))
         }
+        ## prior parameters
+        priorParams <- list(type = method)
     }
 
     ## class of Beta(a, 1), a >= 1 priors for the p-value under the alternative
@@ -229,6 +239,8 @@ ciCalibrate <- function(ci = NULL,
             p <- 2*(1 - stats::pnorm(q = abs(estimate - x)/se))
             ifelse(p > exp(-1), 1, -exp(1)*p*log(p))
         }
+        ## prior parameters
+        priorParams <- list(type = method)
     }
 
     ## compute support interval
@@ -237,7 +249,7 @@ ciCalibrate <- function(ci = NULL,
         warning("Support interval does not exist for specified support level")
     }
     res <- list(si = si, bfFun = bfFun, estimate = estimate, se = se,
-                siLevel = siLevel, ciLevel = ciLevel, method = method)
+                siLevel = siLevel, ciLevel = ciLevel, priorParams = priorParams)
     class(res) <- "supInt"
     return(res)
 }
@@ -258,37 +270,49 @@ print.supInt <- function(x, ...) {
 
     ## Calibration method
     cat("\nCalibration Method\n")
-    if (x$method == "SI-normal") {
-        cat("Normal alternative with mean m =",
-            "and standard deviation s =")
+    if (x$priorParams$type == "SI-normal") {
+        cat("Normal prior for the parameter under the alternative hypothesis with\n",
+            "mean m =", signif(x$priorParams$priorMean, 2),
+            "and standard deviation s =", signif(x$priorParams$priorSD, 2), sep = "")
     }
     ## local normal prior under the alternative
-    if (x$method == "SI-normal-local") {
-        cat("Local normal alternative with standard deviation s =")
+    if (x$priorParams$type == "SI-normal-local") {
+        cat("Local normal prior for the parameter under the alternative hypothesis\n",
+            "with standard deviation s =", signif(x$priorParams$priorSD, 2),
+            sep = "")
     }
     ## nonlical normal moment prior under the alternative
-    if (x$method == "SI-normal-nonlocal") {
-        cat("Nonlocal normal moment alternative with scale parameter s =")
+    if (x$priorParams$type == "SI-normal-nonlocal") {
+        cat("Nonlocal normal moment prior for the parameter under the alternative\n",
+            "hypothesis with scale parameter s =", signif(x$priorParams$priorSD, 2),
+            sep = "")
     }
     ## class of all priors under the alternative
-    if (x$method == "mSI-all") {
-        cat("Minimizing support under class of all alternatives")
+    if (x$priorParams$type == "mSI-all") {
+        cat("Minimizing support for class of all priors for the parameter\n",
+            "under the alternative hypothesis", sep = "")
     }
     ## class of local normal priors under the alternative
-    if (x$method == "mSI-normal-local") {
-        cat("Minimizing support under class of local normal alternatives")
+    if (x$priorParams$type == "mSI-normal-local") {
+        cat("Minimizing support for class of local normal priors for the parameter\n",
+            "under the alternative hypothesis", sep = "")
     }
     ## class of Beta(a, 1), a >= 1 priors for the p-value under the alternative
-    if (x$method == "mSI-eplogp") {
-        cat("Minimizing support under class of Beta(a, 1), a >= 1 priors",
-            "for the p-value of the data under the alternative")
+    if (x$priorParams$type == "mSI-eplogp") {
+        cat("Minimizing support for the class of Beta(a, 1), a >= 1 priors\n",
+            "for the p-value of the data under the alternative", sep = "")
     }
     cat("\n")
 
     ## Support interval
     if (x$siLevel < 1) siLevel <- paste0("1/", signif(1/x$siLevel, 2))
     else siLevel <- as.character(signif(x$siLevel, 2))
-    cat(paste0("\nk = ", siLevel, " Support Interval\n"))
+    if (x$priorParams$type %in% c("mSI-eplogp", "mSI-normal-local", "mSI-all")) {
+        siString <- " Minimum Support Interval\n"
+    } else {
+        siString <- " Support Interval\n"
+    }
+    cat(paste0("\nk = ", siLevel, siString))
     cat("[", paste0(signif(x$si, 2), collapse = ","), "]\n", sep = "")
 
     invisible(x)

@@ -19,7 +19,7 @@ ciCalibrate(
 \arguments{
 \item{ci}{Confidence interval given as a numeric vector of length two}
 
-\item{ciLevel}{Confidence level. Defaults to 0.95.}
+\item{ciLevel}{Confidence level. Defaults to 0.95}
 
 \item{estimate}{Parameter estimate, only required if no confidence interval
 and confidence level are specified}

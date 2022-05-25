@@ -44,7 +44,8 @@ Point Estimate [95% Confidence Interval]
 -0.19 [-0.29,-0.092]
 
 Calibration Method
-Normal alternative with mean m = 0 and standard deviation s = 2
+Normal prior for the parameter under the alternative hypothesis with 
+mean m = 0 and standard deviation s = 2
 
 k = 10 Support Interval
 [-0.27,-0.11]
