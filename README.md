@@ -18,6 +18,7 @@ remotes::install_github(repo = "SamCH93/ciCalibrate")
 ## Usage
 
 ``` r
+jpeg()
 library("ciCalibrate")
 
 ## data from RECOVERY trial
@@ -44,7 +45,7 @@ plot(si10)
 ```
 
 ![Output of the command plot(si10): the Bayes factor function and the 10 support
-interval](SIexample.pdf)
+interval](SIexample.png)
 
 ## References
 
