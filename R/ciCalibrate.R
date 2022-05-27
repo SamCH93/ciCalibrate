@@ -272,19 +272,19 @@ print.supInt <- function(x, ...) {
     cat("\nCalibration Method\n")
     if (x$priorParams$type == "SI-normal") {
         cat("Normal prior for the parameter under the alternative hypothesis with\n",
-            "mean m =", signif(x$priorParams$priorMean, 2),
-            "and standard deviation s =", signif(x$priorParams$priorSD, 2), sep = "")
+            "mean m = ", signif(x$priorParams$priorMean, 2),
+            " and standard deviation s = ", signif(x$priorParams$priorSD, 2), sep = "")
     }
     ## local normal prior under the alternative
     if (x$priorParams$type == "SI-normal-local") {
         cat("Local normal prior for the parameter under the alternative hypothesis\n",
-            "with standard deviation s =", signif(x$priorParams$priorSD, 2),
+            "with standard deviation s = ", signif(x$priorParams$priorSD, 2),
             sep = "")
     }
     ## nonlical normal moment prior under the alternative
     if (x$priorParams$type == "SI-normal-nonlocal") {
         cat("Nonlocal normal moment prior for the parameter under the alternative\n",
-            "hypothesis with scale parameter s =", signif(x$priorParams$priorSD, 2),
+            "hypothesis with scale parameter s = ", signif(x$priorParams$priorSD, 2),
             sep = "")
     }
     ## class of all priors under the alternative
