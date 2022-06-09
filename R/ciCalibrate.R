@@ -271,36 +271,36 @@ print.supInt <- function(x, ...) {
     ## Calibration method
     cat("\nCalibration Method\n")
     if (x$priorParams$type == "SI-normal") {
-        cat("Normal prior for the parameter under the alternative hypothesis with\n",
-            "mean m = ", signif(x$priorParams$priorMean, 2),
-            " and standard deviation s = ", signif(x$priorParams$priorSD, 2), sep = "")
+        cat("Normal prior for parameter under alternative\n",
+            "with mean m = ", signif(x$priorParams$priorMean, 2),
+            " and standard deviation sd = ", signif(x$priorParams$priorSD, 2), sep = "")
     }
     ## local normal prior under the alternative
     if (x$priorParams$type == "SI-normal-local") {
-        cat("Local normal prior for the parameter under the alternative hypothesis\n",
-            "with standard deviation s = ", signif(x$priorParams$priorSD, 2),
+        cat("Local normal prior for parameter under alternative\n",
+            "with standard deviation sd = ", signif(x$priorParams$priorSD, 2),
             sep = "")
     }
     ## nonlical normal moment prior under the alternative
     if (x$priorParams$type == "SI-normal-nonlocal") {
-        cat("Nonlocal normal moment prior for the parameter under the alternative\n",
-            "hypothesis with scale parameter s = ", signif(x$priorParams$priorSD, 2),
+        cat("Nonlocal normal moment prior for parameter under alternative\n",
+            "with scale s = ", signif(x$priorParams$priorSD, 2),
             sep = "")
     }
     ## class of all priors under the alternative
     if (x$priorParams$type == "mSI-all") {
-        cat("Minimizing support for class of all priors for the parameter\n",
-            "under the alternative hypothesis", sep = "")
+        cat("Minimizing support for class of all priors for parameter\n",
+            "under alternative", sep = "")
     }
     ## class of local normal priors under the alternative
     if (x$priorParams$type == "mSI-normal-local") {
-        cat("Minimizing support for class of local normal priors for the parameter\n",
-            "under the alternative hypothesis", sep = "")
+        cat("Minimizing support for class of local normal priors parameter\n",
+            "under alternative", sep = "")
     }
     ## class of Beta(a, 1), a >= 1 priors for the p-value under the alternative
     if (x$priorParams$type == "mSI-eplogp") {
         cat("Minimizing support for the class of Beta(a, 1), a >= 1 priors\n",
-            "for the p-value of the data under the alternative", sep = "")
+            "for p-value of data under alternative", sep = "")
     }
     cat("\n")
 
