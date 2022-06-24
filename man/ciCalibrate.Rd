@@ -78,7 +78,7 @@ following classes of prior distribution are available:
 \itemize{
 \item \code{method = "mSI-all"}: the class of all prior distributions under the
 alternative, this leads to the narrowest support interval possible
-\item \code{method = "mSI-normal-local"}: the class oflocal normal prior
+\item \code{method = "mSI-normal-local"}: the class of local normal prior
 distributions under the alternative, i.e., \eqn{\theta \,|\, H_1 \sim
 N(\theta_0, v)}{theta | H1 ~ N(theta0, v)} with \eqn{v \geq 0}{v >= 0}
 \item \code{method = "mSI-eplogp"}: the class of monotonically decreasing beta

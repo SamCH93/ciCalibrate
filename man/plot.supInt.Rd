@@ -14,5 +14,5 @@
 \item{...}{Other arguments}
 }
 \description{
-Plot method for supInt object
+Plots Bayes factor function and support interval.
 }

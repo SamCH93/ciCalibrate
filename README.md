@@ -42,8 +42,8 @@ si10
 #> -0.19 [-0.29,-0.092]
 #> 
 #> Calibration Method
-#> Normal prior for the parameter under the alternative hypothesis with 
-#> mean m = 0 and standard deviation s = 2
+#> Normal prior for parameter under alternative
+#> with mean m = 0 and standard deviation sd = 2
 #> 
 #> k = 10 Support Interval
 #> [-0.27,-0.11]
@@ -56,8 +56,8 @@ interval](SIexample.png)
 
 ## References
 
-* Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential calibration of
-  confidence intervals. To appear on arXiv soon.
+* Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential Calibration of
+  Confidence Intervals. To appear on arXiv soon.
   [10.48550/arXiv.XXXX.XXXXX](https://doi.org/10.48550/arXiv.XXXX.XXXXX)
 
 * Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The

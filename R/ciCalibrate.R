@@ -37,7 +37,7 @@
 #' * \code{method = "mSI-all"}: the class of all prior distributions under the
 #' alternative, this leads to the narrowest support interval possible
 #'
-#' * \code{method = "mSI-normal-local"}: the class oflocal normal prior
+#' * \code{method = "mSI-normal-local"}: the class of local normal prior
 #' distributions under the alternative, i.e., \eqn{\theta \,|\, H_1 \sim
 #' N(\theta_0, v)}{theta | H1 ~ N(theta0, v)} with \eqn{v \geq 0}{v >= 0}
 #'
@@ -257,6 +257,8 @@ ciCalibrate <- function(ci = NULL,
 
 #' Print method for supInt object
 #' @method print supInt
+#' @description Prints parameter estimate, confidence interval, and support
+#'     interval.
 #' @param x A supInt object
 #' @param ... Other arguments
 #' @export
@@ -320,6 +322,7 @@ print.supInt <- function(x, ...) {
 
 #' Plot method for supInt object
 #' @method plot supInt
+#' @description Plots Bayes factor function and support interval.
 #' @param x A supInt object
 #' @param xlim Limits of x-axis
 #' @param ... Other arguments

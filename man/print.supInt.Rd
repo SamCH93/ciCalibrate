@@ -12,5 +12,6 @@
 \item{...}{Other arguments}
 }
 \description{
-Print method for supInt object
+Prints parameter estimate, confidence interval, and support
+    interval.
 }
