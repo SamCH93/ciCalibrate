@@ -6,7 +6,7 @@ parameter estimate and standard error or based on a confidence interval for the
 respective parameter. The main function for doing so is `ciCalibrate`, see the
 manual with `?ciCalibrate` for the available options. Theoretical background on
 support intervals is provided in the accompanying preprint 
-[Pawel et al. (2022)](https://doi.org/10.48550/arXiv.XXXX.XXXXX) and also 
+[Pawel et al. (2022)](https://doi.org/10.48550/arXiv.2206.12290) and also 
 [Wagenmakers et al.(2020)](https://doi.org/10.1007/s10670-019-00209-z).
 
 ## Installation
@@ -58,7 +58,7 @@ interval](SIexample.png)
 
 * Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential Calibration of
   Confidence Intervals. To appear on arXiv soon.
-  [10.48550/arXiv.XXXX.XXXXX](https://doi.org/10.48550/arXiv.XXXX.XXXXX)
+  [doi:10.48550/arXiv.2206.12290](https://doi.org/10.48550/arXiv.2206.12290)
 
 * Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The
   support interval. Erkenntnis.
