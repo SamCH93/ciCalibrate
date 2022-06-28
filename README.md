@@ -57,7 +57,7 @@ interval](SIexample.png)
 ## References
 
 * Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential Calibration of
-  Confidence Intervals. To appear on arXiv soon.
+  Confidence Intervals.
   [doi:10.48550/arXiv.2206.12290](https://doi.org/10.48550/arXiv.2206.12290)
 
 * Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The

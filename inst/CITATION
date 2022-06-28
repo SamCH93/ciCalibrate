@@ -6,7 +6,7 @@ citEntry(entry = "article",
          author = c(person(given = "Samuel", family = "Pawel", role = "aut"),
                     person(given = "Alexander", family = "Ly", role = "aut"),
                     person(given = "Eric-Jan", family = "Wagenmakers", role = "aut")),
-         doi = "10.48550/arXiv.XXXX.XXXXX",
+         doi = "10.48550/arXiv.2206.12290",
          journal = "arXiv Preprint",
          volume = "",
          number = "",
@@ -14,5 +14,5 @@ citEntry(entry = "article",
          year = 2022,
          textVersion = paste("Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022).",
                              "Evidential Calibration of Confidence Intervals.",
-                             "To appear on arXiv soon. doi:10.48550/arXiv.XXXX.XXXXX"
+                             "https://doi.org/10.48550/arXiv.2206.12290"
                              ))
