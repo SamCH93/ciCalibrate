@@ -63,8 +63,22 @@
 #' @param priorSD Prior standard deviation / spread, only required for
 #'     \code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}.
 #'
-#' @return An object of class \code{supInt} with \code{print} and \code{plot}
-#'     methods
+#' @return Returns an object of class "\code{supInt}" which is a list
+#'  containing:\tabular{ll}{
+#'    \code{si} \tab The computed support interval. \cr
+#'    \tab \cr
+#'    \code{bfFun} \tab The computed Bayes factor function. \cr
+#'    \tab \cr
+#'    \code{estimate} \tab The specified parameter estimate. \cr
+#'    \tab \cr
+#'    \code{se} \tab The specified standard error. \cr
+#'    \tab \cr
+#'    \code{siLevel} \tab The specified support level. \cr
+#'    \tab \cr
+#'    \code{ciLevel} \tab The specified confidence level. \cr
+#'    \tab \cr
+#'    \code{priorParams} \tab The specified prior parameters. \cr
+#' }
 #'
 #' @references
 #'
@@ -254,17 +268,17 @@ ciCalibrate <- function(ci = NULL,
 }
 
 
-#' Print method for class \code{supInt}
+#' Print method for class "\code{supInt}"
 #' @method print supInt
 #'
 #' @description Prints parameter estimate, confidence interval, and support
 #'     interval.
 #'
-#' @param x Object of class \code{supInt}
+#' @param x Object of class "\code{supInt}"
 #' @param ... Other arguments for print
 #'
-#' @return Prints text summary in the console and returns an invisible copy of
-#'     the supInt object
+#' @return Prints text summary in the console and invisibly returns the
+#'     "\code{supInt}" object
 #'
 #' @author Samuel Pawel
 #'
@@ -327,16 +341,16 @@ print.supInt <- function(x, ...) {
     invisible(x)
 }
 
-#' Plot method for class \code{supInt}
+#' Plot method for class "\code{supInt}"
 #' @method plot supInt
 #'
 #' @description Plots Bayes factor function and support interval at the specified support level.
 #'
-#' @param x Object of class \code{supInt}
+#' @param x Object of class "\code{supInt}"
 #' @param xlim Limits of x-axis
 #' @param ... Other arguments for plot
 #'
-#' @return A plot of Bayes factor function and support interval
+#' @return Generates a plot of the Bayes factor function with support interval
 #'
 #' @author Samuel Pawel
 #'

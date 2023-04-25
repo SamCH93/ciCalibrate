@@ -40,8 +40,22 @@ confidence interval and confidence level are specified.}
 \code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}.}
 }
 \value{
-An object of class \code{supInt} with \code{print} and \code{plot}
-methods
+Returns an object of class "\code{supInt}" which is a list
+containing:\tabular{ll}{
+\code{si} \tab The computed support interval. \cr
+\tab \cr
+\code{bfFun} \tab The computed Bayes factor function. \cr
+\tab \cr
+\code{estimate} \tab The specified parameter estimate. \cr
+\tab \cr
+\code{se} \tab The specified standard error. \cr
+\tab \cr
+\code{siLevel} \tab The specified support level. \cr
+\tab \cr
+\code{ciLevel} \tab The specified confidence level. \cr
+\tab \cr
+\code{priorParams} \tab The specified prior parameters. \cr
+}
 }
 \description{
 This function computes a support interval for an unknown

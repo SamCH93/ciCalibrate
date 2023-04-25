@@ -2,19 +2,19 @@
 % Please edit documentation in R/ciCalibrate.R
 \name{plot.supInt}
 \alias{plot.supInt}
-\title{Plot method for class \code{supInt}}
+\title{Plot method for class "\code{supInt}"}
 \usage{
 \method{plot}{supInt}(x, xlim = x$estimate + c(-1, 1) * 3 * x$se, ...)
 }
 \arguments{
-\item{x}{Object of class \code{supInt}}
+\item{x}{Object of class "\code{supInt}"}
 
 \item{xlim}{Limits of x-axis}
 
 \item{...}{Other arguments for plot}
 }
 \value{
-A plot of Bayes factor function and support interval
+Generates a plot of the Bayes factor function with support interval
 }
 \description{
 Plots Bayes factor function and support interval at the specified support level.

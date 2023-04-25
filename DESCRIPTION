@@ -1,6 +1,6 @@
 Package: ciCalibrate
-Title: Calibration of Confidence Intervals to Support Intervals
 Version: 0.42
+Date: 2023-04-25
 Authors@R:
     person(given = "Samuel",
            family = "Pawel",
@@ -9,12 +9,13 @@ Authors@R:
            comment = c(ORCID = "0000-0003-2779-320X"))
 Author: Samuel Pawel [aut, cre] (<https://orcid.org/0000-0003-2779-320X>)
 Maintainer: Samuel Pawel <samuel.pawel@uzh.ch>
-Description: Provides functionality for computing support intervals for unknown univariate parameters based on a confidence interval for the parameter or a parameter estimate with standard error (Pawel et al., 2022) <doi:10.48550/arXiv.2206.12290>.
+Title: Calibration of Confidence Intervals to Support Intervals
+Description: Provides functionality for computing support intervals for univariate parameters based on confidence intervals or parameter estimates with standard errors (Pawel et al., 2022) <doi:10.48550/arXiv.2206.12290>.
 License: GPL-3
 Encoding: UTF-8
 Imports: lamW
 Suggests: roxygen2, testthat
+NeedsCompilation: no
 RoxygenNote: 7.2.3
 URL: https://github.com/SamCH93/ciCalibrate
 BugReports: https://github.com/SamCH93/ciCalibrate/issues
-NeedsCompilation: no
