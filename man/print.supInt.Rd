@@ -2,16 +2,23 @@
 % Please edit documentation in R/ciCalibrate.R
 \name{print.supInt}
 \alias{print.supInt}
-\title{Print method for supInt object}
+\title{Print method for class \code{supInt}}
 \usage{
 \method{print}{supInt}(x, ...)
 }
 \arguments{
-\item{x}{A supInt object}
+\item{x}{Object of class \code{supInt}}
 
-\item{...}{Other arguments}
+\item{...}{Other arguments for print}
+}
+\value{
+Prints text summary in the console and returns an invisible copy of
+    the supInt object
 }
 \description{
 Prints parameter estimate, confidence interval, and support
     interval.
+}
+\author{
+Samuel Pawel
 }

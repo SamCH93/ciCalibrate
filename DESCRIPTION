@@ -7,9 +7,14 @@ Authors@R:
            role = c("aut", "cre"),
            email = "samuel.pawel@uzh.ch",
            comment = c(ORCID = "0000-0003-2779-320X"))
-Description: Provides functionality for computing support intervals for unknown univariate parameters based on a parameter estimate and standard error or from a confidence interval for the respective parameter.
+Author: Samuel Pawel [aut, cre] (<https://orcid.org/0000-0003-2779-320X>)
+Maintainer: Samuel Pawel <samuel.pawel@uzh.ch>
+Description: Provides functionality for computing support intervals for unknown univariate parameters based on a confidence interval for the parameter or a parameter estimate with standard error (Pawel et al., 2022) <doi:10.48550/arXiv.2206.12290>.
 License: GPL-3
 Encoding: UTF-8
 Imports: lamW
 Suggests: roxygen2, testthat
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
+URL: https://github.com/SamCH93/ciCalibrate
+BugReports: https://github.com/SamCH93/ciCalibrate/issues
+NeedsCompilation: no

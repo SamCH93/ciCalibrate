@@ -23,15 +23,14 @@
 #' \code{priorSD}^2)}{theta | H1 ~ N(theta0, priorSD^2)}
 #'
 #' * \code{method = "SI-normal-nonlocal"}: a nonlocal normal moment prior with
-#' scale \code{priorSD}, i.e., a prior with density \eqn{f(\theta \,|\, H_1) =
-#' N(\theta \,|\, \theta_0, \code{priorSD}^2) \times (\theta -
-#' \theta_0)^2/\code{priorSD}^2}{f(theta | H1) = N(theta0, priorSD^2)*
+#' spread parameter \code{priorSD}, i.e., a prior with density \eqn{f(\theta
+#' \,|\, H_1) = N(\theta \,|\, \theta_0, \code{priorSD}^2) \times (\theta -
+#' \theta_0)^2/\code{priorSD}^2}{f(theta | H1) = N(theta | theta0, priorSD^2)*
 #' (theta - theta0)^2/\code{priorSD}^2}
 #'
-#'
-#' The function also allows to compute *minimum support intervals* which only
-#' require to specify a class of priors for the parameter under the alternative
-#' and then compute the minimum Bayes factor over the class of alternatives. The
+#' The function also allows to compute *minimum support intervals* which require
+#' to only specify a class of priors for the parameter under the alternative and
+#' then compute the minimum Bayes factor over the class of alternatives. The
 #' following classes of prior distribution are available:
 #'
 #' * \code{method = "mSI-all"}: the class of all prior distributions under the
@@ -47,25 +46,25 @@
 #' - theta0)/se))}, i.e. \eqn{p \,|\, H_1 \sim \mbox{Be}(\xi, 1)}{p | H1 ~
 #' Be(xi, 1)} with \eqn{\xi \geq 1}{xi >= 1}
 #'
-#'
 #' @md
 #'
-#' @param ci Confidence interval given as a numeric vector of length two
-#' @param ciLevel Confidence level. Defaults to 0.95
-#' @param estimate Parameter estimate, only required if no confidence interval
-#'     and confidence level are specified
-#' @param se Standard error of the parameter estimate, only required if no
-#'     confidence interval and confidence level are specified
-#' @param siLevel Support level. Defaults to 1
-#' @param method Calibration method, can either be \code{"SI-normal"},
+#' @param ci Confidence interval given as a numeric vector of length two.
+#' @param ciLevel Confidence level. Defaults to 0.95.
+#' @param estimate Parameter estimate. Only required if no confidence interval
+#'     and confidence level are specified.
+#' @param se Standard error of the parameter estimate. Only required if no
+#'     confidence interval and confidence level are specified.
+#' @param siLevel Support level. Defaults to 1.
+#' @param method Calibration method. Can either be \code{"SI-normal"},
 #'     \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}, \code{"mSI-all"},
 #'     \code{"mSI-normal-local"}, or \code{"mSI-eplogp"}. Defaults to
-#'     \code{"SI-normal"}
-#' @param priorMean Prior mean, only required for \code{"SI-normal"}
-#' @param priorSD Prior standard deviation / scale, only required for
-#'     \code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}
+#'     \code{"SI-normal"}. See details for more information.
+#' @param priorMean Prior mean, only required for \code{"SI-normal"}.
+#' @param priorSD Prior standard deviation / spread, only required for
+#'     \code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}.
 #'
-#' @return A supInt object
+#' @return An object of class \code{supInt} with \code{print} and \code{plot}
+#'     methods
 #'
 #' @references
 #'
@@ -83,20 +82,20 @@
 #' ciHR <- c(0.75, 0.93)
 #' ci <- log(ciHR)
 #'
-#' ## need prior under alternative hypothesis H1
-#' m <- log(0.8)
-#' s <- 2
+#' ## normal prior under the alternative hypothesis H1
+#' m <- log(0.8) # prior mean
+#' s <- 2 # prior sd
 #'
 #' ## compute 10 support interval
-#' si <- ciCalibrate(ci = ci, method = "SI-normal", priorMean = m, priorSD = s,
-#'                   siLevel = 10)
+#' si <- ciCalibrate(ci = ci, method = "SI-normal", priorMean = m,
+#'                   priorSD = s, siLevel = 10)
 #' si # on logHR scale
 #' exp(si$si) # on HR scale
 #'
 #' ## plot Bayes factor function and support interval
 #' plot(si)
 #'
-#' ## minimum support interval
+#' ## minimum support interval based on local normal priors
 #' msi <- ciCalibrate(ci = ci, method = "mSI-normal-local")
 #' plot(msi)
 #'
@@ -255,12 +254,20 @@ ciCalibrate <- function(ci = NULL,
 }
 
 
-#' Print method for supInt object
+#' Print method for class \code{supInt}
 #' @method print supInt
+#'
 #' @description Prints parameter estimate, confidence interval, and support
 #'     interval.
-#' @param x A supInt object
-#' @param ... Other arguments
+#'
+#' @param x Object of class \code{supInt}
+#' @param ... Other arguments for print
+#'
+#' @return Prints text summary in the console and returns an invisible copy of
+#'     the supInt object
+#'
+#' @author Samuel Pawel
+#'
 #' @export
 print.supInt <- function(x, ...) {
     ## Point estimate with confidence interval
@@ -286,7 +293,7 @@ print.supInt <- function(x, ...) {
     ## nonlical normal moment prior under the alternative
     if (x$priorParams$type == "SI-normal-nonlocal") {
         cat("Nonlocal normal moment prior for parameter under alternative\n",
-            "with scale s = ", signif(x$priorParams$priorSD, 2),
+            "with spread s = ", signif(x$priorParams$priorSD, 2),
             sep = "")
     }
     ## class of all priors under the alternative
@@ -296,7 +303,7 @@ print.supInt <- function(x, ...) {
     }
     ## class of local normal priors under the alternative
     if (x$priorParams$type == "mSI-normal-local") {
-        cat("Minimizing support for class of local normal priors parameter\n",
+        cat("Minimizing support for class of local normal priors for parameter\n",
             "under alternative", sep = "")
     }
     ## class of Beta(a, 1), a >= 1 priors for the p-value under the alternative
@@ -320,12 +327,19 @@ print.supInt <- function(x, ...) {
     invisible(x)
 }
 
-#' Plot method for supInt object
+#' Plot method for class \code{supInt}
 #' @method plot supInt
-#' @description Plots Bayes factor function and support interval.
-#' @param x A supInt object
+#'
+#' @description Plots Bayes factor function and support interval at the specified support level.
+#'
+#' @param x Object of class \code{supInt}
 #' @param xlim Limits of x-axis
-#' @param ... Other arguments
+#' @param ... Other arguments for plot
+#'
+#' @return A plot of Bayes factor function and support interval
+#'
+#' @author Samuel Pawel
+#'
 #' @export
 plot.supInt <- function(x,
                         xlim = x$estimate + c(-1, 1)*3*x$se,

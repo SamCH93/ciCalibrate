@@ -17,30 +17,31 @@ ciCalibrate(
 )
 }
 \arguments{
-\item{ci}{Confidence interval given as a numeric vector of length two}
+\item{ci}{Confidence interval given as a numeric vector of length two.}
 
-\item{ciLevel}{Confidence level. Defaults to 0.95}
+\item{ciLevel}{Confidence level. Defaults to 0.95.}
 
-\item{estimate}{Parameter estimate, only required if no confidence interval
-and confidence level are specified}
+\item{estimate}{Parameter estimate. Only required if no confidence interval
+and confidence level are specified.}
 
-\item{se}{Standard error of the parameter estimate, only required if no
-confidence interval and confidence level are specified}
+\item{se}{Standard error of the parameter estimate. Only required if no
+confidence interval and confidence level are specified.}
 
-\item{siLevel}{Support level. Defaults to 1}
+\item{siLevel}{Support level. Defaults to 1.}
 
-\item{method}{Calibration method, can either be \code{"SI-normal"},
+\item{method}{Calibration method. Can either be \code{"SI-normal"},
 \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}, \code{"mSI-all"},
 \code{"mSI-normal-local"}, or \code{"mSI-eplogp"}. Defaults to
-\code{"SI-normal"}}
+\code{"SI-normal"}. See details for more information.}
 
-\item{priorMean}{Prior mean, only required for \code{"SI-normal"}}
+\item{priorMean}{Prior mean, only required for \code{"SI-normal"}.}
 
-\item{priorSD}{Prior standard deviation / scale, only required for
-\code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}}
+\item{priorSD}{Prior standard deviation / spread, only required for
+\code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}.}
 }
 \value{
-A supInt object
+An object of class \code{supInt} with \code{print} and \code{plot}
+methods
 }
 \description{
 This function computes a support interval for an unknown
@@ -65,15 +66,15 @@ N(priorMean, priorSD^2)}
 deviation \code{priorSD}, i.e., \eqn{\theta \,|\, H_1 \sim N(\theta_0,
 \code{priorSD}^2)}{theta | H1 ~ N(theta0, priorSD^2)}
 \item \code{method = "SI-normal-nonlocal"}: a nonlocal normal moment prior with
-scale \code{priorSD}, i.e., a prior with density \eqn{f(\theta \,|\, H_1) =
-N(\theta \,|\, \theta_0, \code{priorSD}^2) \times (\theta -
-\theta_0)^2/\code{priorSD}^2}{f(theta | H1) = N(theta0, priorSD^2)*
+spread parameter \code{priorSD}, i.e., a prior with density \eqn{f(\theta
+\,|\, H_1) = N(\theta \,|\, \theta_0, \code{priorSD}^2) \times (\theta -
+\theta_0)^2/\code{priorSD}^2}{f(theta | H1) = N(theta | theta0, priorSD^2)*
 (theta - theta0)^2/\code{priorSD}^2}
 }
 
-The function also allows to compute \emph{minimum support intervals} which only
-require to specify a class of priors for the parameter under the alternative
-and then compute the minimum Bayes factor over the class of alternatives. The
+The function also allows to compute \emph{minimum support intervals} which require
+to only specify a class of priors for the parameter under the alternative and
+then compute the minimum Bayes factor over the class of alternatives. The
 following classes of prior distribution are available:
 \itemize{
 \item \code{method = "mSI-all"}: the class of all prior distributions under the
@@ -93,28 +94,28 @@ Be(xi, 1)} with \eqn{\xi \geq 1}{xi >= 1}
 ciHR <- c(0.75, 0.93)
 ci <- log(ciHR)
 
-## need prior under alternative hypothesis H1
-m <- log(0.8)
-s <- 2
+## normal prior under the alternative hypothesis H1
+m <- log(0.8) # prior mean
+s <- 2 # prior sd
 
 ## compute 10 support interval
-si <- ciCalibrate(ci = ci, method = "SI-normal", priorMean = m, priorSD = s,
-                  siLevel = 10)
+si <- ciCalibrate(ci = ci, method = "SI-normal", priorMean = m,
+                  priorSD = s, siLevel = 10)
 si # on logHR scale
 exp(si$si) # on HR scale
 
 ## plot Bayes factor function and support interval
 plot(si)
 
-## minimum support interval
+## minimum support interval based on local normal priors
 msi <- ciCalibrate(ci = ci, method = "mSI-normal-local")
 plot(msi)
 
 }
 \references{
 Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential calibration of
-confidence intervals. to appear on arXiv soon.
-\doi{10.48550/arXiv.XXXX.XXXXX}
+confidence intervals. arXiv preprint.
+\doi{10.48550/arXiv.2206.12290}
 
 Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The
 support interval. Erkenntnis. \doi{10.1007/s10670-019-00209-z}

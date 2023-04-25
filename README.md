@@ -4,15 +4,19 @@
 univariate parameters. A support interval can either be computed based on a
 parameter estimate and standard error or based on a confidence interval for the
 respective parameter. The main function for doing so is `ciCalibrate`, see the
-manual with `?ciCalibrate` for the available options. Theoretical background on
-support intervals is provided in the accompanying preprint 
-[Pawel et al. (2022)](https://doi.org/10.48550/arXiv.2206.12290) and also 
-[Wagenmakers et al.(2020)](https://doi.org/10.1007/s10670-019-00209-z).
+documentation with `?ciCalibrate` for the available options. Theoretical
+background on support intervals is provided in the accompanying preprint [Pawel
+et al. (2022)](https://doi.org/10.48550/arXiv.2206.12290) and also [Wagenmakers
+et al. (2020)](https://doi.org/10.1007/s10670-019-00209-z).
 
 ## Installation
 
 ```r
+## from GitHub (requires remotes package)
 remotes::install_github(repo = "SamCH93/ciCalibrate")
+
+## from CRAN (not yet available)
+## install.packages(pkgs = "ciCalibrate")
 ```
 
 ## Usage
@@ -62,4 +66,4 @@ interval](SIexample.png)
 
 * Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The
   support interval. Erkenntnis.
-  [10.1007/s10670-019-00209-z](https://doi.org/10.1007/s10670-019-00209-z)
+  [doi:10.1007/s10670-019-00209-z](https://doi.org/10.1007/s10670-019-00209-z)
