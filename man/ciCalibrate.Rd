@@ -40,7 +40,7 @@ confidence interval and confidence level are specified.}
 \code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}.}
 }
 \value{
-Returns an object of class "\code{supInt}" which is a list
+Returns an object of class \code{"supInt"} which is a list
 containing:\tabular{ll}{
 \code{si} \tab The computed support interval. \cr
 \tab \cr
@@ -128,8 +128,7 @@ plot(msi)
 }
 \references{
 Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential calibration of
-confidence intervals. arXiv preprint.
-\doi{10.48550/arXiv.2206.12290}
+confidence intervals. arXiv preprint. \doi{10.48550/arXiv.2206.12290}
 
 Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The
 support interval. Erkenntnis. \doi{10.1007/s10670-019-00209-z}

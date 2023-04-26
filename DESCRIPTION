@@ -1,6 +1,6 @@
 Package: ciCalibrate
-Version: 0.42
-Date: 2023-04-25
+Version: 0.42.2
+Date: 2023-04-26
 Authors@R:
     person(given = "Samuel",
            family = "Pawel",

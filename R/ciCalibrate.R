@@ -63,7 +63,7 @@
 #' @param priorSD Prior standard deviation / spread, only required for
 #'     \code{"SI-normal"}, \code{"SI-normal-local"}, \code{"SI-normal-nonlocal"}.
 #'
-#' @return Returns an object of class "\code{supInt}" which is a list
+#' @return Returns an object of class \code{"supInt"} which is a list
 #'  containing:\tabular{ll}{
 #'    \code{si} \tab The computed support interval. \cr
 #'    \tab \cr
@@ -83,8 +83,7 @@
 #' @references
 #'
 #' Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential calibration of
-#' confidence intervals. arXiv preprint.
-#' \doi{10.48550/arXiv.2206.12290}
+#' confidence intervals. arXiv preprint. \doi{10.48550/arXiv.2206.12290}
 #'
 #' Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The
 #' support interval. Erkenntnis. \doi{10.1007/s10670-019-00209-z}
@@ -268,19 +267,25 @@ ciCalibrate <- function(ci = NULL,
 }
 
 
-#' Print method for class "\code{supInt}"
+#' Print method for class \code{"supInt"}
 #' @method print supInt
 #'
 #' @description Prints parameter estimate, confidence interval, and support
 #'     interval.
 #'
-#' @param x Object of class "\code{supInt}"
-#' @param ... Other arguments for print
+#' @param x Object of class \code{"supInt"}
+#' @param ... Other arguments (for consistency with the generic)
 #'
 #' @return Prints text summary in the console and invisibly returns the
-#'     "\code{supInt}" object
+#'     \code{"supInt"} object
 #'
 #' @author Samuel Pawel
+#'
+#' @examples
+#' ## compute and print 5 support interval
+#' si5 <- ciCalibrate(ci = c(-2, -0.5), method = "SI-normal", priorMean = -0.3,
+#'                    priorSD = 2, siLevel = 5)
+#' print(si5)
 #'
 #' @export
 print.supInt <- function(x, ...) {
@@ -341,18 +346,26 @@ print.supInt <- function(x, ...) {
     invisible(x)
 }
 
-#' Plot method for class "\code{supInt}"
+#' Plot method for class \code{"supInt"}
 #' @method plot supInt
 #'
 #' @description Plots Bayes factor function and support interval at the specified support level.
 #'
-#' @param x Object of class "\code{supInt}"
+#' @param x Object of class \code{"supInt"}
 #' @param xlim Limits of x-axis
-#' @param ... Other arguments for plot
+#' @param ... Other arguments passed to \code{plot}
 #'
 #' @return Generates a plot of the Bayes factor function with support interval
 #'
 #' @author Samuel Pawel
+#'
+#' @examples
+#' ## compute 3 support interval
+#' si3 <- ciCalibrate(ci = c(0.3, 1.5), method = "SI-normal", priorMean = 0,
+#'                    priorSD = 2, siLevel = 3)
+#'
+#' ## plot Bayes factor function and support interval
+#' plot(si3, xlim = c(0, 1.75))
 #'
 #' @export
 plot.supInt <- function(x,

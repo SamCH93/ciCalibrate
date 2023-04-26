@@ -5,7 +5,7 @@
 ## ----------------------------------------------------------------------------
 
 PACKAGE = ciCalibrate
-VERSION = 0.42
+VERSION = 0.42.2
 TAR = $(PACKAGE)_$(VERSION).tar.gz
 
 all: build

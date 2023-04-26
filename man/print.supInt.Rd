@@ -2,22 +2,29 @@
 % Please edit documentation in R/ciCalibrate.R
 \name{print.supInt}
 \alias{print.supInt}
-\title{Print method for class "\code{supInt}"}
+\title{Print method for class \code{"supInt"}}
 \usage{
 \method{print}{supInt}(x, ...)
 }
 \arguments{
-\item{x}{Object of class "\code{supInt}"}
+\item{x}{Object of class \code{"supInt"}}
 
-\item{...}{Other arguments for print}
+\item{...}{Other arguments (for consistency with the generic)}
 }
 \value{
 Prints text summary in the console and invisibly returns the
-    "\code{supInt}" object
+    \code{"supInt"} object
 }
 \description{
 Prints parameter estimate, confidence interval, and support
     interval.
+}
+\examples{
+## compute and print 5 support interval
+si5 <- ciCalibrate(ci = c(-2, -0.5), method = "SI-normal", priorMean = -0.3,
+                   priorSD = 2, siLevel = 5)
+print(si5)
+
 }
 \author{
 Samuel Pawel

@@ -1,18 +1,16 @@
 citHeader(paste("To cite the R-package 'ciCalibrate' in publications,",
                 "please use:"))
 
-citEntry(entry = "article",
+bibentry(bibtype = "Misc",
          title = "Evidential Calibration of Confidence Intervals",
          author = c(person(given = "Samuel", family = "Pawel", role = "aut"),
                     person(given = "Alexander", family = "Ly", role = "aut"),
                     person(given = "Eric-Jan", family = "Wagenmakers", role = "aut")),
          doi = "10.48550/arXiv.2206.12290",
-         journal = "arXiv Preprint",
-         volume = "",
-         number = "",
-         pages = "",
-         year = 2022,
-         textVersion = paste("Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022).",
-                             "Evidential Calibration of Confidence Intervals.",
-                             "https://doi.org/10.48550/arXiv.2206.12290"
-                             ))
+         ## journal = "",
+         ## volume = "",
+         ## number = "",
+         ## pages = "",
+         note = "arXiv Preprint",
+         year = "2022"
+         )
