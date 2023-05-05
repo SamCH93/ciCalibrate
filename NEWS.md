@@ -1,3 +1,7 @@
+# ciCalibrate 0.42.3
+
+- change test package to tinytest to reduce testing dependencies
+
 # ciCalibrate 0.42.2
 
 - change `citEntry` to `bibentry` in inst/CITATION

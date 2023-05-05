@@ -1,5 +1,5 @@
 Package: ciCalibrate
-Version: 0.42.2
+Version: 0.42.3
 Date: 2023-05-05
 Authors@R:
     person(given = "Samuel",
