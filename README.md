@@ -5,18 +5,18 @@ univariate parameters. A support interval can either be computed based on a
 parameter estimate and standard error or based on a confidence interval for the
 respective parameter. The main function for doing so is `ciCalibrate`, see the
 documentation with `?ciCalibrate` for the available options. Theoretical
-background on support intervals is provided in the accompanying preprint [Pawel
-et al. (2022)](https://doi.org/10.48550/arXiv.2206.12290) and also [Wagenmakers
+background on support intervals is provided in the accompanying paper [Pawel et
+al. (2023)](https://doi.org/10.1080/00031305.2023.2216239) and also [Wagenmakers
 et al. (2020)](https://doi.org/10.1007/s10670-019-00209-z).
 
 ## Installation
 
 ```r
-## from GitHub (requires remotes package)
-remotes::install_github(repo = "SamCH93/ciCalibrate")
+## development version from GitHub (requires remotes package)
+## remotes::install_github(repo = "SamCH93/ciCalibrate")
 
-## from CRAN (not yet available)
-## install.packages(pkgs = "ciCalibrate")
+## from CRAN
+install.packages(pkgs = "ciCalibrate")
 ```
 
 ## Usage
@@ -60,9 +60,9 @@ interval](SIexample.png)
 
 ## References
 
-* Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential Calibration of
-  Confidence Intervals.
-  [doi:10.48550/arXiv.2206.12290](https://doi.org/10.48550/arXiv.2206.12290)
+Pawel, S., Ly, A., and Wagenmakers, E.-J. (2023). Evidential Calibration of
+Confidence Intervals. *The American Statistician*.
+[doi:10.1080/00031305.2023.2216239](https://doi.org/10.1080/00031305.2023.2216239)
 
 * Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The
   support interval. Erkenntnis.

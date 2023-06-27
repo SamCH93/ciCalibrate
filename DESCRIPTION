@@ -1,6 +1,6 @@
 Package: ciCalibrate
 Version: 0.42.3
-Date: 2023-05-05
+Date: 2023-06-27
 Authors@R:
     person(given = "Samuel",
            family = "Pawel",
@@ -10,7 +10,7 @@ Authors@R:
 Author: Samuel Pawel [aut, cre] (<https://orcid.org/0000-0003-2779-320X>)
 Maintainer: Samuel Pawel <samuel.pawel@uzh.ch>
 Title: Calibration of Confidence Intervals to Support Intervals
-Description: Provides functionality for computing support intervals for univariate parameters based on confidence intervals or parameter estimates with standard errors (Pawel et al., 2022) <doi:10.48550/arXiv.2206.12290>.
+Description: Provides functionality for computing support intervals for univariate parameters based on confidence intervals or parameter estimates with standard errors (Pawel et al., 2023) <doi:10.1080/00031305.2023.2216239>.
 License: GPL-3
 Encoding: UTF-8
 Imports: lamW

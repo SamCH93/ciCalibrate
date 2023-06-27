@@ -1,16 +1,15 @@
 citHeader(paste("To cite the R-package 'ciCalibrate' in publications,",
                 "please use:"))
 
-bibentry(bibtype = "Misc",
+bibentry(bibtype = "Article",
          title = "Evidential Calibration of Confidence Intervals",
          author = c(person(given = "Samuel", family = "Pawel", role = "aut"),
                     person(given = "Alexander", family = "Ly", role = "aut"),
                     person(given = "Eric-Jan", family = "Wagenmakers", role = "aut")),
-         doi = "10.48550/arXiv.2206.12290",
-         ## journal = "",
+         doi = "10.1080/00031305.2023.2216239",
+         journal = "The American Statistician",
          ## volume = "",
          ## number = "",
          ## pages = "",
-         note = "arXiv Preprint",
-         year = "2022"
+         year = "2023"
          )

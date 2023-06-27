@@ -127,8 +127,9 @@ plot(msi)
 
 }
 \references{
-Pawel, S., Ly, A., and Wagenmakers, E.-J. (2022). Evidential calibration of
-confidence intervals. arXiv preprint. \doi{10.48550/arXiv.2206.12290}
+Pawel, S., Ly, A., and Wagenmakers, E.-J. (2023). Evidential Calibration of
+Confidence Intervals. The American Statistician.
+\doi{10.1080/00031305.2023.2216239}
 
 Wagenmakers, E.-J., Gronau, Q. F., Dablander, F., and Etz, A. (2020). The
 support interval. Erkenntnis. \doi{10.1007/s10670-019-00209-z}

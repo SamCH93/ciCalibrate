@@ -1,6 +1,7 @@
 # ciCalibrate 0.42.3
 
-- change test package to tinytest to reduce testing dependencies
+- change testing famework to tinytest to reduce testing dependencies
+- add citation of the now published paper
 
 # ciCalibrate 0.42.2
 
